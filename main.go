@@ -61,24 +61,18 @@ func checkErr(err error) {
 	}
 }
 
-// Get all movies
-
-// response and request handlers
 func GetAccounts(c *gin.Context) {
 	db := setupDB()
 
 	printMessage("Getting accounts...")
 
-	// Get all movies from movies table that don't have movieID = "1"
 	rows, err := db.Query("SELECT * FROM accounts")
 
 	// check errors
 	checkErr(err)
 
-	// var response []JsonResponse
 	var accounts []Account
 
-	// Foreach movie
 	for rows.Next() {
 		var id int64
 		var owner string
@@ -97,14 +91,10 @@ func GetAccounts(c *gin.Context) {
 	var response = JsonResponse{Type: "success", Data: accounts}
 	c.IndentedJSON(http.StatusOK, response)
 
-	// json.NewEncoder(c).Encode(response)
 }
 
-// Create a movie
-
-// response and request handlers
 func CreateAccount(c *gin.Context) {
-	//fmt.Println(c)
+
 	var req NewAccount
 	var account []Account
 
